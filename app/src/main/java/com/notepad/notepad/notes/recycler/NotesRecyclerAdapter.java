@@ -1,9 +1,12 @@
-package com.notepad.notepad;
+package com.notepad.notepad.notes.recycler;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import com.notepad.notepad.R;
+import com.notepad.notepad.notes.NotesListPresenter;
 
 public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesViewHolder> {
 

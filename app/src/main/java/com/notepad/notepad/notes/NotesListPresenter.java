@@ -1,4 +1,7 @@
-package com.notepad.notepad;
+package com.notepad.notepad.notes;
+
+import com.notepad.notepad.notes.Note;
+import com.notepad.notepad.notes.recycler.NotesRowView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +9,18 @@ import java.util.List;
 public class NotesListPresenter {
 
     private List<Note> notes = new ArrayList<>();
-    
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
 
     public void onBindRepositoryRowViewAtPosition(int position, NotesRowView rowView) {
        Note note = notes.get(position);
-       rowView.setTitle(note.getMiniatureText());
+       rowView.setTitle(note.getTitle());
     }
 
     public int getRepositoriesRowsCount() {
