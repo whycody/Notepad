@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.notepad.notepad.R;
 import com.notepad.notepad.notes.data.NoteDao;
@@ -31,7 +32,7 @@ public class NotesActivity extends AppCompatActivity {
         noteDao.insertNote(note);
 
         presenter.setNotes(noteDao.getAllNotes());
-        adapter = new NotesRecyclerAdapter(presenter);
+        adapter = new NotesRecyclerAdapter(presenter, getBaseContext());
 
         recyclerView = findViewById(R.id.notesList);
         recyclerView.setAdapter(adapter);

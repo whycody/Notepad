@@ -1,6 +1,5 @@
 package com.notepad.notepad.notes;
 
-import com.notepad.notepad.notes.Note;
 import com.notepad.notepad.notes.recycler.NotesRowView;
 
 import java.util.ArrayList;
