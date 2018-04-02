@@ -1,16 +1,13 @@
 package com.notepad.notepad.notes.data;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.notepad.notepad.notes.Note;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 public class NoteDao {
@@ -61,6 +58,10 @@ public class NoteDao {
         }
 
         return notes;
+    }
+
+    public Note getNoteAtPosition(int position){
+        return getAllNotes().get(position);
     }
 
     public List<Note> getNotesLike(String text) {

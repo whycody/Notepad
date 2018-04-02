@@ -17,6 +17,14 @@ public class NotesListPresenter {
         this.notes = notes;
     }
 
+    public NotesListPresenter(){
+
+    }
+
+    public NotesListPresenter(List<Note> notes){
+
+    }
+
     public void onBindRepositoryRowViewAtPosition(int position, NotesRowView rowView) {
        Note note = notes.get(position);
        rowView.setTitle(note.getTitle());
@@ -26,4 +34,7 @@ public class NotesListPresenter {
         return notes.size();
     }
 
+    public void onItemClickedAtPosition(int position) {
+
+    }
 }

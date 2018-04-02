@@ -8,13 +8,14 @@ public class NoteRealm extends RealmObject {
     @PrimaryKey
     private int id;
     private String title;
+    private String noteText;
 
     public NoteRealm(){
 
     }
 
-    public NoteRealm(int id, String title) {
-        this.id = id;
+    public NoteRealm(String title, String noteText) {
+        this.noteText = noteText;
         this.title = title;
     }
 
@@ -32,6 +33,14 @@ public class NoteRealm extends RealmObject {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getNoteText() {
+        return noteText;
+    }
+
+    public void setNoteText(String noteText) {
+        this.noteText = noteText;
     }
 
     @Override

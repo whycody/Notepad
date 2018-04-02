@@ -12,7 +12,7 @@ import com.notepad.notepad.notes.NotesListPresenter;
 
 public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesViewHolder> {
 
-    private final NotesListPresenter presenter;
+    private NotesListPresenter presenter;
     private Context context;
 
     public NotesRecyclerAdapter(NotesListPresenter presenter, Context context){
@@ -26,7 +26,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesViewHolder> 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_notes, parent, false);
 
-        return new NotesViewHolder(view);
+        return new NotesViewHolder(presenter, view);
     }
 
     @Override
