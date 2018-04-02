@@ -25,7 +25,7 @@ public class NotesActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.notesList);
         recyclerView.setAdapter(adapter);
-        
+
         setSupportActionBar(toolbar);
 
 
