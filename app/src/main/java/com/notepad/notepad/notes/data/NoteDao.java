@@ -33,6 +33,7 @@ public class NoteDao {
 
         NoteRealm noteRealm = realm.createObject(NoteRealm.class, generateId());
         noteRealm.setTitle(note.getTitle());
+        noteRealm.setNoteText(note.getNoteText());
 
         realm.commitTransaction();
     }

@@ -26,7 +26,10 @@ public class NotesActivity extends AppCompatActivity {
 
         noteDao = new NoteDao(getBaseContext());
 
-        presenter = new NotesListPresenter(noteDao.getAllNotes());
+        Note note = new Note("Jajka", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        noteDao.insertNote(note);
+
+        presenter = new NotesListPresenter(noteDao.getAllNotes(), this);
         adapter = new NotesRecyclerAdapter(presenter, getBaseContext());
 
         recyclerView = findViewById(R.id.notesList);

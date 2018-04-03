@@ -8,6 +8,7 @@ public class NoteMapper {
         Note note = new Note();
         note.setId(noteRealm.getId());
         note.setTitle(noteRealm.getTitle());
+        note.setNoteText(noteRealm.getNoteText());
         return note;
     }
 }
