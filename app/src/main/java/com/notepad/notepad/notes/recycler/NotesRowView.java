@@ -4,6 +4,4 @@ public interface NotesRowView {
 
     void setTitle(String title);
 
-    void setNoteText(String noteText);
-
 }
