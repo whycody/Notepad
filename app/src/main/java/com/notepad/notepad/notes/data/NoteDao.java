@@ -28,6 +28,10 @@ public class NoteDao {
         return new NoteMapper().fromRealm(noteRealm);
     }
 
+    public void setNoteText(int id, String text){
+        realm.where(NoteRealm.class).equalTo("id", id).findFirst().setNoteText(text);
+    }
+
     public void insertNote(Note note) {
         realm.beginTransaction();
 
@@ -52,7 +56,7 @@ public class NoteDao {
         List<Note> notes = new ArrayList<>();
         NoteMapper mapper = new NoteMapper();
 
-        RealmResults<NoteRealm> all = realm.where(NoteRealm.class).findAll();
+        RealmResults<NoteRealm> all = realm.where(NoteRealm.class).findAll().sort("id");
 
         for (NoteRealm noteRealm : all) {
             notes.add(mapper.fromRealm(noteRealm));

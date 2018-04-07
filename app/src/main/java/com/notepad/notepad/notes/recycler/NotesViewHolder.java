@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,12 +14,11 @@ import com.notepad.notepad.notes.NotesListPresenter;
 import com.notepad.notepad.notes.data.NoteDao;
 import com.notepad.notepad.notes.notes.view.NotesViewActivity;
 
-import org.w3c.dom.Text;
-
 public class NotesViewHolder extends RecyclerView.ViewHolder implements NotesRowView{
 
     private TextView title;
     public CardView noteCard;
+    public ImageButton deleteNoteBtn;
     private NotesListPresenter presenter;
     private NoteDao noteDao;
 
@@ -27,14 +27,33 @@ public class NotesViewHolder extends RecyclerView.ViewHolder implements NotesRow
         this.presenter = presenter;
         title = itemView.findViewById(R.id.title);
         noteCard = itemView.findViewById(R.id.noteCard);
-        presenter.setOnItemClickListener(new NotesListPresenter.OnItemClickListener() {
+        deleteNoteBtn = itemView.findViewById(R.id.deleteNoteBtn);
+
+        presenter.setOnClickNewActivity(new NotesListPresenter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, Context context) {
                 noteDao = new NoteDao(context);
 
                 context.startActivity(new Intent(context, NotesViewActivity.class)
-                .putExtra("title", noteDao.getNoteAtPosition(position).getTitle())
-                .putExtra("noteText", noteDao.getNoteAtPosition(position).getNoteText()));
+                .putExtra("title", presenter.getNotes().get(position).getTitle())
+                .putExtra("noteText", presenter.getNotes().get(position).getNoteText())
+                .putExtra("noteID", presenter.getNotes().get(position).getId()));
+            }
+        });
+
+        presenter.setOnClickDelete(new NotesListPresenter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, Context context) {
+                noteDao = new NoteDao(context);
+
+                noteDao.deleteNoteById(noteDao.getNoteAtPosition(position).getId());
+                presenter.removeNote(position);
+                presenter.notifyItemDeleted(position);
+                Toast.makeText(context, presenter.getNotes().toString(), Toast.LENGTH_SHORT).show();
+
+
+
+
             }
         });
     }

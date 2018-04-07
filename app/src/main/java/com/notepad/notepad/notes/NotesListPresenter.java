@@ -5,19 +5,16 @@ import android.content.Intent;
 import android.view.View;
 
 import com.notepad.notepad.notes.notes.add.AddNoteActivity;
-import com.notepad.notepad.notes.notes.view.NotesViewActivity;
-import com.notepad.notepad.notes.recycler.NotesRecyclerAdapter;
-import com.notepad.notepad.notes.recycler.NotesRowView;
 import com.notepad.notepad.notes.recycler.NotesViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NotesListPresenter {
 
     private List<Note> notes;
     private Context context;
-    private OnItemClickListener listener;
+    private OnItemClickListener onClickNewActivity;
+    private OnItemClickListener onClickDelete;
     private NotesView notesView;
 
     public interface OnItemClickListener{
@@ -36,13 +33,20 @@ public class NotesListPresenter {
        rowView.noteCard.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               listener.onItemClick(position, context);
+               onClickNewActivity.onItemClick(position, context);
+           }
+       });
+
+       rowView.deleteNoteBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               onClickDelete.onItemClick(position, context);
            }
        });
     }
 
     public void setupViews(){
-        notesView.setOnClickListener(new View.OnClickListener() {
+        notesView.setOnClickNewActivity(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, AddNoteActivity.class);
@@ -55,13 +59,28 @@ public class NotesListPresenter {
         return notes.size();
     }
 
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
+    public void notifyItemDeleted(int position){
+        notesView.notifyNoteDeleted(position);
     }
+
+
+
+
+    public void setOnClickNewActivity(OnItemClickListener onClickNewActivity){
+        this.onClickNewActivity = onClickNewActivity;
+    }
+
+    public void setOnClickDelete(OnItemClickListener onClickDelete){
+        this.onClickDelete = onClickDelete;
+    }
+
 
     public void setNotes(List<Note> notes) {
         this.notes = notes;
+    }
+
+    public void removeNote(int position){
+        notes.remove(position);
     }
 
     public List<Note> getNotes() {

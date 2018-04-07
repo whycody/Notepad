@@ -27,7 +27,7 @@ public class NotesActivity extends AppCompatActivity implements NotesView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.appBarLayout);
         floatingBtn = findViewById(R.id.floatingBtn);
         recyclerView = findViewById(R.id.notesList);
 
@@ -36,7 +36,7 @@ public class NotesActivity extends AppCompatActivity implements NotesView {
         adapter = new NotesRecyclerAdapter(presenter, getBaseContext());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        recyclerView.addItemDecoration(new LinearVerticalSpacing(12));
+        recyclerView.addItemDecoration(new LinearVerticalSpacing(18));
         recyclerView.setAdapter(adapter);
 
         presenter.setupViews();
@@ -45,7 +45,14 @@ public class NotesActivity extends AppCompatActivity implements NotesView {
     }
 
     @Override
-    public void setOnClickListener(View.OnClickListener onClickListener) {
+    public void setOnClickNewActivity(View.OnClickListener onClickListener) {
         floatingBtn.setOnClickListener(onClickListener);
     }
+
+    @Override
+    public void notifyNoteDeleted(int position) {
+        adapter.notifyItemRemoved(position);
+        adapter.notifyItemRangeChanged(position,adapter.getItemCount());
+    }
+
 }

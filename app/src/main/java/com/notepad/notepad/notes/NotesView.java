@@ -4,6 +4,8 @@ import android.view.View;
 
 public interface NotesView {
 
-    void setOnClickListener(View.OnClickListener onClickListener);
+    void setOnClickNewActivity(View.OnClickListener onClickListener);
+
+    void notifyNoteDeleted(int position);
 
 }

@@ -1,22 +1,25 @@
 package com.notepad.notepad.notes.notes.add;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.notepad.notepad.R;
+import com.notepad.notepad.notes.NotesActivity;
 import com.notepad.notepad.notes.data.NoteDao;
 
-public class AddNoteActivity extends AppCompatActivity {
+public class AddNoteActivity extends AppCompatActivity implements AddNoteView{
 
     private Button addNoteBtn;
     private EditText addTitleView, addNoteTextView;
     private Toolbar addNoteToolbar;
 
-    private AddNotePresenter presenter;
+    private AddNotePresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class AddNoteActivity extends AppCompatActivity {
         addTitleView = findViewById(R.id.addTitleView);
         addNoteTextView = findViewById(R.id.addNoteTextView);
 
-        presenter = new AddNotePresenter(new NoteDao(this), this);
+        presenter = new AddNotePresenterImpl(new NoteDao(this), this, new AddNoteInteractorImpl());
 
         setSupportActionBar(addNoteToolbar);
 
@@ -40,7 +43,7 @@ public class AddNoteActivity extends AppCompatActivity {
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addNote(addTitleView.getText().toString(), addNoteTextView.getText().toString());
+                presenter.validateCredentials(addTitleView.getText().toString(), addNoteTextView.getText().toString());
             }
         });
 
@@ -52,4 +55,20 @@ public class AddNoteActivity extends AppCompatActivity {
         return true;
     }
 
+
+    @Override
+    public void onTitleError() {
+        Toast.makeText(this, getResources().getString(R.string.set_title), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNoteTextError() {
+        Toast.makeText(this, getResources().getString(R.string.set_note_text), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess() {
+        startActivity(new Intent(this, NotesActivity.class));
+        Toast.makeText(this, getResources().getString(R.string.note_added), Toast.LENGTH_SHORT).show();
+    }
 }
