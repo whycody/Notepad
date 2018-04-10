@@ -14,10 +14,14 @@ public class NotesViewDao {
     }
 
     public String getTitle(){
-        return bundle.getString("title");
+        return bundle.getString("noteTitle");
     }
 
     public String getNoteText(){
         return bundle.getString("noteText");
+    }
+
+    public int getNoteId(){
+        return bundle.getInt("noteID");
     }
 }
