@@ -6,10 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import com.notepad.notepad.R;
 
@@ -18,6 +16,7 @@ public class NotesViewActivity extends AppCompatActivity implements NotesView{
     private Toolbar notesViewToolbar;
     private EditText notesEditText;
     private NotesViewPresenter viewPresenter;
+    private Button backOrSaveBtn;
 
     private String defaultNoteText;
 
@@ -28,6 +27,7 @@ public class NotesViewActivity extends AppCompatActivity implements NotesView{
 
         notesEditText = findViewById(R.id.notesEditText);
         viewPresenter = new NotesViewPresenter(this, this);
+        backOrSaveBtn = findViewById(R.id.backOrSaveBtn);
 
         notesViewToolbar = findViewById(R.id.notesViewToolbar);
         setSupportActionBar(notesViewToolbar);
@@ -35,6 +35,8 @@ public class NotesViewActivity extends AppCompatActivity implements NotesView{
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        backOrSaveBtn.setTextColor(getResources().getColorStateList(R.color.text_white_black));
+        backOrSaveBtn.setOnClickListener(backOnClick);
         viewPresenter.setupViews();
 
         notesEditText.addTextChangedListener(new TextWatcher() {
@@ -69,9 +71,9 @@ public class NotesViewActivity extends AppCompatActivity implements NotesView{
     @Override
     public void onTextChanged(String text) {
         if(text.equals(defaultNoteText)) {
-            hideBottomSheetSave();
+            setButtonOnBack();
         }else
-            showBottomSheetSave();
+            setButtonOnSave();
     }
 
     @Override
@@ -80,9 +82,28 @@ public class NotesViewActivity extends AppCompatActivity implements NotesView{
         return true;
     }
 
-    private void hideBottomSheetSave() {
+    private void setButtonOnBack() {
+        backOrSaveBtn.setText(getResources().getString(R.string.back));
+        backOrSaveBtn.setOnClickListener(backOnClick);
     }
 
-    private void showBottomSheetSave() {
+    private void setButtonOnSave() {
+        backOrSaveBtn.setText(getResources().getString(R.string.save));
+        backOrSaveBtn.setOnClickListener(saveOnClick);
     }
+
+    private View.OnClickListener backOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
+
+    private View.OnClickListener saveOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            viewPresenter.editActualNote(notesEditText.getText().toString());
+            finish();
+        }
+    };
 }

@@ -9,4 +9,5 @@
     <string name="set_note_text">Enter the note text</string>
     <string name="note_added">Note has added</string>
     <string name="save">Save</string>
+    <string name="back">Back</string>
 </resources>

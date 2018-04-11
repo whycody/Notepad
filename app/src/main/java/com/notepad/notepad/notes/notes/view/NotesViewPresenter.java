@@ -26,7 +26,7 @@ public class NotesViewPresenter {
     }
 
     public void editActualNote(String text){
-        noteDao.getNoteById(notesViewDao.getNoteId()).setNoteText(text);
+        noteDao.editNoteText(notesViewDao.getNoteId(), text);
     }
 
 

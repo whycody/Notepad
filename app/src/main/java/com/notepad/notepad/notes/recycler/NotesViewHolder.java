@@ -35,9 +35,9 @@ public class NotesViewHolder extends RecyclerView.ViewHolder implements NotesRow
                 noteDao = new NoteDao(context);
 
                 context.startActivity(new Intent(context, NotesViewActivity.class)
-                .putExtra("noteTitle", presenter.getNotes().get(position).getTitle())
-                .putExtra("noteText", presenter.getNotes().get(position).getNoteText())
-                .putExtra("noteID", presenter.getNotes().get(position).getId()));
+                .putExtra("noteTitle", noteDao.getNoteAtPosition(position).getTitle())
+                .putExtra("noteText", noteDao.getNoteAtPosition(position).getNoteText())
+                .putExtra("noteID", noteDao.getNoteAtPosition(position).getId()));
             }
         });
 

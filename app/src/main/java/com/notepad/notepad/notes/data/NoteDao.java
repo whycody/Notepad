@@ -28,8 +28,10 @@ public class NoteDao {
         return new NoteMapper().fromRealm(noteRealm);
     }
 
-    public void setNoteText(int id, String text){
+    public void editNoteText(int id, String text){
+        realm.beginTransaction();
         realm.where(NoteRealm.class).equalTo("id", id).findFirst().setNoteText(text);
+        realm.commitTransaction();
     }
 
     public void insertNote(Note note) {
@@ -51,7 +53,6 @@ public class NoteDao {
         });
     }
 
-    // pobranie wszystkich notatek
     public List<Note> getAllNotes() {
         List<Note> notes = new ArrayList<>();
         NoteMapper mapper = new NoteMapper();
@@ -82,10 +83,6 @@ public class NoteDao {
         }
 
         return notes;
-    }
-
-    public List<NoteRealm> getRawNotes(){
-        return realm.where(NoteRealm.class).findAll();
     }
 
     public void deleteAllNotes() {
