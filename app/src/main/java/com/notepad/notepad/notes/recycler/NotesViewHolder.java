@@ -49,7 +49,6 @@ public class NotesViewHolder extends RecyclerView.ViewHolder implements NotesRow
                 noteDao.deleteNoteById(noteDao.getNoteAtPosition(position).getId());
                 presenter.removeNote(position);
                 presenter.notifyItemDeleted(position);
-                Toast.makeText(context, presenter.getNotes().toString(), Toast.LENGTH_SHORT).show();
 
 
 

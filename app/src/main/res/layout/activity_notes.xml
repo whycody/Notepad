@@ -5,14 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".notes.NotesActivity">
+    tools:context=".notes.NotesActivity"
+    android:background="@color/colorPrimaryLight">
 
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@android:color/white"
+            app:titleTextColor="@color/colorPrimary"
             android:theme="@style/toolbar_theme"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
@@ -20,7 +22,7 @@
         android:id="@+id/notesList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

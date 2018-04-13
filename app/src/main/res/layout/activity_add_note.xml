@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".notes.notes.add.AddNoteActivity"
-    android:background="@color/colorPrimary">
+    tools:context=".notes.notes.add.AddNoteActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/addNoteToolbar"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/transparent"
         app:title="@string/add_note"
-        android:theme="@style/toolbar_theme"/>
+        android:theme="@style/toolbar_theme"
+        app:titleTextColor="@color/colorPrimary"/>
 
     <EditText
         android:id="@+id/addTitleView"

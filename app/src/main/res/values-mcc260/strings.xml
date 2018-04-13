@@ -8,4 +8,7 @@
     <string name="set_title">Podaj tytuł</string>
     <string name="set_note_text">Wpisz treść notatki</string>
     <string name="note_added">Notatka dodana</string>
+    <string name="save">Zapisz</string>
+    <string name="back">Wróć</string>
+    <string name="notes">Notatki</string>
 </resources>
